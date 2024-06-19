@@ -1,5 +1,9 @@
-const mapDiv: HTMLElement = document.getElementById('map')!; 
+import { Driver } from "./Driver";
+import { Mapping } from "./Map";
+import { Passenger } from "./Passenger";
 
-console.log(mapDiv); 
+const map = new Mapping("map");
+map.addMarker(new Driver());
+map.addMarker(new Passenger());
 
-new google.maps.Map(mapDiv); 
+

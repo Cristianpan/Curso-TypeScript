@@ -1,4 +1,5 @@
-export abstract class Person {
+import { Mappable } from "./Mappable";
+export abstract class Person implements Mappable {
   protected readonly name: string;
   protected readonly location: {
     lat: number;
@@ -8,5 +9,9 @@ export abstract class Person {
   constructor(name: string, location: { lat: number; lng: number }) {
     this.name = name;
     this.location = location;
+  }
+
+  get getLocation() {
+    return this.location;
   }
 }
