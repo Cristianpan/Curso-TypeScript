@@ -1,13 +1,16 @@
+import { Mappable } from "./Mappable";
+import { SearchOptions } from "./SearchOption";
+
 export class MapGeocoder {
   private map: google.maps.Map;
   private geocoder: google.maps.Geocoder;
 
   constructor(map: google.maps.Map) {
     this.map = map;
-    this.geocoder = new google.maps.Geocoder;
+    this.geocoder = new google.maps.Geocoder();
   }
 
-  addMarkerInfo(marker: google.maps.Marker): void {
+  addMarkerInfo(marker: google.maps.Marker, mappable: Mappable): void {
     marker.addListener("click", () => {
       const latlng = {
         lat: marker.getPosition()!.lat(),
@@ -17,11 +20,29 @@ export class MapGeocoder {
       this.geocoder.geocode({ location: latlng }, (results, status) => {
         if (status === "OK") {
           const infoWindow = new google.maps.InfoWindow({
-            content: results[0].formatted_address,
+            content: mappable.markerTitle(() => results[0].formatted_address),
           });
-          infoWindow.open(this.map, marker); 
+          infoWindow.open(this.map, marker);
         } else {
-            window.alert(`Error en la geolocalización: ${status}`)
+          window.alert(`Error en la geolocalización: ${status}`);
+        }
+      });
+    });
+  }
+
+  searchAddres(options: SearchOptions): void {
+    options.searchButton.addEventListener("click", () => {
+      const address = options.input.value;
+      this.geocoder.geocode({ address }, (result, status) => {
+        if (status === "OK") {
+          this.map.setCenter(result[0].geometry.location);
+          this.map.setZoom(16);
+          new google.maps.Marker({
+            map: this.map,
+            position: result[0].geometry.location,
+          });
+        } else {
+          window.alert("Error en la geolocalización");
         }
       });
     });

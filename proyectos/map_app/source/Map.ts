@@ -1,5 +1,6 @@
 import { MapGeocoder } from "./MapGeocoder";
 import { Mappable } from "./Mappable";
+import { SearchOptions } from "./SearchOption";
 
 export class Mapping {
   private googleMap: google.maps.Map;
@@ -51,6 +52,10 @@ addPassengerMarker(passenger: Passenger) {
       position: { ...mappable.getLocation },
     });
 
-    this.geocoder.addMarkerInfo(marker);
+    this.geocoder.addMarkerInfo(marker, mappable);
+  }
+
+  searchAddres(options: SearchOptions): void{
+    this.geocoder.searchAddres(options); 
   }
 }

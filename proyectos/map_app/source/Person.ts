@@ -14,4 +14,8 @@ export abstract class Person implements Mappable {
   get getLocation() {
     return this.location;
   }
+
+  markerTitle(addres: () => string): string {
+    return `La direccion de ${this.name} es ${addres()}`; 
+  }
 }

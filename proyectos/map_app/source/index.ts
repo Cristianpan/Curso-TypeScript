@@ -6,4 +6,7 @@ const map = new Mapping("map");
 map.addMarker(new Driver());
 map.addMarker(new Passenger());
 
-
+map.searchAddres({
+    input:<HTMLInputElement> document.getElementById("address")!, 
+    searchButton: <HTMLButtonElement> document.getElementById("searchButton")!
+})
