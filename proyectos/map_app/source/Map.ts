@@ -2,6 +2,8 @@ import { MapGeocoder } from "./MapGeocoder";
 import { Mappable } from "./Mappable";
 import { SearchOptions } from "./SearchOption";
 
+
+// Initialize and add the map
 export class Mapping {
   private googleMap: google.maps.Map;
   private geocoder: MapGeocoder; 
