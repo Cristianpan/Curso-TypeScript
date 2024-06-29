@@ -1,0 +1,12 @@
+html {
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0; 
+}
+
+#root {
+  margin: 3rem;
+}
